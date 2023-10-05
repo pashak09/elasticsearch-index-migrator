@@ -1,9 +1,9 @@
 {
   "name": "elasticsearch-index-migrator",
-  "version": "0.0.2-alpha",
-  "main": "dist/index.js",
+  "version": "0.0.3-alpha",
+  "main": "cli.js",
   "license": "MIT",
-  "types": "dist/index.d.ts",
+  "types": "index.d.ts",
   "scripts": {
     "build": "rimraf ./dist && tsc -p tsconfig.json && tsc-alias -p tsconfig.json",
     "lint": "eslint src/**/*.ts",
@@ -14,7 +14,7 @@
     "url": "https://github.com/pashak09/elasticsearch-index-migrator"
   },
   "bin": {
-    "elasticsearch-index-migrator": "dist/cli.js"
+    "elasticsearch-index-migrator": "cli.js"
   },
   "dependencies": {
     "@elastic/elasticsearch": "^8.10.0",
