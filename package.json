@@ -1,6 +1,6 @@
 {
   "name": "elasticsearch-index-migrator",
-  "version": "0.0.5-alpha",
+  "version": "0.0.6-alpha",
   "main": "cli.js",
   "license": "MIT",
   "types": "index.d.ts",
@@ -42,6 +42,7 @@
   },
   "files": [
     "index.d.ts",
+    "**/MigrationInterface.d.ts",
     "**/*.js"
   ],
   "engines": {
