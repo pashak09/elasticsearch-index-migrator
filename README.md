@@ -25,8 +25,8 @@ that describes each option:
 Add these command to `package.json` file:
 
 ```json
-"elasticsearch-create-migration": "node -r ts-node/register -r tsconfig-paths/register elasticsearch-index-migrator --command=createEmptyMigration --migrationsDir=./elasticsearch-migrations --migrationName=Test",
-"elasticsearch-run-migrations": "node -r ts-node/register -r tsconfig-paths/register elasticsearch-index-migrator --command=runMigrations --migrationsDir=./elasticsearch-migrations"
+"elasticsearch-create-migration": "node -r ts-node/register -r tsconfig-paths/register ./node_modules/.bin/elasticsearch-index-migrator --command=createEmptyMigration --migrationsDir=./elasticsearch-migrations --migrationName=Test",
+"elasticsearch-run-migrations": "node -r ts-node/register -r tsconfig-paths/register ./node_modules/.bin/elasticsearch-index-migrator --command=runMigrations --migrationsDir=./elasticsearch-migrations"
 ```
 
 This package uses these environment variables to pass Elasticsearch authorizations by default:
