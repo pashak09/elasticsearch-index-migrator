@@ -19,9 +19,9 @@ export async function createEmptyMigration(options: Options): Promise<void> {
     ? `.${options.migrationFileExtension}`
     : '.ts';
 
-  const migrationFileName = `${currentDate.getTime()}-${resolve(
+  const migrationFileName = `${resolve(
     options.migrationsDir,
-    options.migrationName,
+    `${currentDate.getTime()}-${options.migrationName}`,
   )}${ext}`;
 
   if ((await isFileExists(migrationFileName)) === true) {
