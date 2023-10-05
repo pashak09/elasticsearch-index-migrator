@@ -1,0 +1,145 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "airbnb-typescript/base",
+    "plugin:@typescript-eslint/recommended-type-checked",
+    "plugin:@typescript-eslint/stylistic-type-checked",
+    "prettier",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": [
+    "import",
+    "@typescript-eslint"
+  ],
+  "overrides": [
+    {
+      "files": ["src/**/__tests__/*Spec.ts", "./tests/**/*Spec.ts"],
+      "plugins": ["jest"],
+      "extends": ["plugin:jest/recommended", "plugin:jest/style"],
+      "rules": {
+        "@typescript-eslint/unbound-method": "off",
+        "jest/unbound-method": "error",
+        "jest/no-conditional-expect": "warn"
+      }
+    }
+  ],
+  "rules": {
+    "@typescript-eslint/non-nullable-type-assertion-style": "off",
+    "@typescript-eslint/consistent-type-assertions": "off",
+    "@typescript-eslint/consistent-type-definitions": "off",
+    "@typescript-eslint/prefer-optional-chain": "warn",
+    "@typescript-eslint/prefer-nullish-coalescing": "warn",
+    "@typescript-eslint/await-thenable": "warn",
+    "@typescript-eslint/no-unsafe-enum-comparison": "warn",
+    "@typescript-eslint/no-unsafe-member-access": "warn",
+    "@typescript-eslint/no-unsafe-call": "warn",
+    "@typescript-eslint/no-unsafe-argument": "warn",
+    "@typescript-eslint/no-unsafe-assignment": "warn",
+    "@typescript-eslint/no-redundant-type-constituents": "warn",
+    "@typescript-eslint/no-unsafe-return": "warn",
+    "@typescript-eslint/no-base-to-string": "warn",
+    "@typescript-eslint/restrict-template-expressions": "warn",
+    "@typescript-eslint/no-for-in-array": "off",
+    "@typescript-eslint/require-await": "off",
+    "no-duplicate-imports": "error",
+    "object-shorthand": ["error", "always"],
+    "@typescript-eslint/explicit-function-return-type": [
+      "error",
+      {
+        "allowTypedFunctionExpressions": false,
+        "allowHigherOrderFunctions": false,
+        "allowDirectConstAssertionInArrowFunctions": false
+      }
+    ],
+    "@typescript-eslint/typedef": [
+      "error",
+      {
+        "arrowParameter": true,
+        "memberVariableDeclaration": true,
+        "parameter": true,
+        "propertyDeclaration": true
+      }
+    ],
+    "padding-line-between-statements": [
+      "error",
+      { "blankLine": "always", "prev": "class", "next": "export" },
+      { "blankLine": "always", "prev": "*", "next": "return" },
+      { "blankLine": "always", "prev": ["const", "let", "var"], "next": "*"},
+      { "blankLine": "any",    "prev": ["const", "let", "var"], "next": ["const", "let", "var"]},
+      { "blankLine": "always", "prev": "directive", "next": "*" },
+      { "blankLine": "any",    "prev": "directive", "next": "directive" },
+      { "blankLine": "always", "prev": ["case", "default"], "next": "*" },
+      { "blankLine": "always", "prev": "*", "next": ["if", "switch", "for", "while"] }
+    ],
+    "class-methods-use-this": "off",
+    "no-param-reassign": ["error", { "props": false }],
+    "import/order": [
+      "error",
+      {
+        "newlines-between": "always",
+        "alphabetize":{
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": ["**/__tests__/**/*", "./tests/**/*"]
+      }
+    ],
+    "import/prefer-default-export": "off",
+
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error", {
+        "argsIgnorePattern": "^_"
+    }],
+
+    "@typescript-eslint/explicit-member-accessibility": ["error", {
+      "accessibility": "no-public"
+    }],
+    "@typescript-eslint/member-ordering": ["error", {
+      "default": [
+        "signature",
+        "field",
+        "constructor",
+        "method"
+      ]}
+    ],
+    "@typescript-eslint/no-inferrable-types": "off",
+    "@typescript-eslint/unbound-method": ["error"],
+    "@typescript-eslint/array-type": ["error", {
+      "default": "array-simple"
+    }],
+    "no-continue": "off",
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": ["error"],
+    "no-restricted-syntax": "off",
+    "no-await-in-loop": "off",
+    "curly": "error",
+    "no-unreachable": "error",
+    "no-console": "error",
+    "@typescript-eslint/no-unnecessary-condition": ["warn"],
+    "import/no-relative-parent-imports": "error"
+  },
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module",
+    "project": true
+  },
+  "env": {
+    "node": true,
+    "browser": false,
+    "es2021": true,
+    "jest": true
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".ts"]
+      }
+    }
+  }
+}
