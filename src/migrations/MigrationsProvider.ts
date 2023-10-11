@@ -1,6 +1,7 @@
 import { FileLoader } from '@lib/FileLoader';
 import { MigrationInterface } from '@lib/migrations/MigrationInterface';
 import { Sifter, SifterResult } from '@lib/migrations/Sifter';
+import { MigrationNameParser } from '@lib/services/MigrationNameParser';
 
 type Options = Readonly<{
   migrationsDir: string;
@@ -17,6 +18,7 @@ export class MigrationsProvider implements MigrationsProviderInterface {
   constructor(
     private readonly fileLoader: FileLoader,
     private readonly sifter: Sifter,
+    private readonly migrationNameParser: MigrationNameParser,
     private readonly options: Options,
   ) {}
 
@@ -42,10 +44,16 @@ export class MigrationsProvider implements MigrationsProviderInterface {
           );
         }
 
-        if (!(loadedMigration.getCreatedAt() instanceof Date)) {
-          throw new Error(
-            `getCreatedAt method in ${sifterResult.fileName} file should return a Date`,
-          );
+        try {
+          this.migrationNameParser.parse(loadedMigration.getName());
+        } catch (error: unknown) {
+          if (error instanceof Error) {
+            throw new Error(
+              `Got an error in getName method in ${sifterResult.fileName}. ${error.message}`,
+            );
+          }
+
+          throw error;
         }
 
         return loadedMigration;

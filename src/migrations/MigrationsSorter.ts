@@ -1,10 +1,12 @@
 import { ExecutedMigration } from '@lib/indexes/ExecutedMigration';
 import { MigrationInterface } from '@lib/migrations/MigrationInterface';
 import { ExecutedMigrationRepository } from '@lib/repositories/ExecutedMigrationRepository';
+import { MigrationNameParser } from '@lib/services/MigrationNameParser';
 
 export class MigrationsSorter {
   constructor(
     private readonly executedMigrationRepository: ExecutedMigrationRepository,
+    private readonly migrationCreatedAtParser: MigrationNameParser,
   ) {}
 
   async getPendingMigrations(
@@ -26,7 +28,10 @@ export class MigrationsSorter {
           mapper[migration.getName()] === undefined,
       )
       .sort((a: MigrationInterface, b: MigrationInterface): number => {
-        return a.getCreatedAt().getTime() - b.getCreatedAt().getTime();
+        return (
+          this.migrationCreatedAtParser.parse(a.getName()).createdAt.getTime() -
+          this.migrationCreatedAtParser.parse(b.getName()).createdAt.getTime()
+        );
       });
   }
 }

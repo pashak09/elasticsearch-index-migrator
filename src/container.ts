@@ -17,6 +17,7 @@ import { IndexCreator } from '@lib/services/IndexCreator';
 import { IndexMapper } from '@lib/services/IndexMapper';
 import { IndexNameResolver } from '@lib/services/IndexNameResolver';
 import { Logger, LoggerInterface, LogLevel } from '@lib/services/Logger';
+import { MigrationNameParser } from '@lib/services/MigrationNameParser';
 
 type Type<T = never> = new (...args: never[]) => T;
 
@@ -44,6 +45,10 @@ export class Container {
 
     this.registerService(Logger, logger);
 
+    const migrationNameParser = new MigrationNameParser();
+
+    this.registerService(MigrationNameParser, migrationNameParser);
+
     const sifter = new Sifter();
 
     this.registerService(Sifter, sifter);
@@ -51,6 +56,7 @@ export class Container {
     const migrationsProvider = new MigrationsProvider(
       fileLoader,
       sifter,
+      migrationNameParser,
       cliOptions,
     );
 
@@ -108,11 +114,15 @@ export class Container {
     const migrationSaver = new MigrationSaver(
       elasticsearchClient,
       indexNameResolver,
+      migrationNameParser,
     );
 
     this.registerService(MigrationSaver, migrationSaver);
 
-    const migrationsSorter = new MigrationsSorter(executedMigrationRepository);
+    const migrationsSorter = new MigrationsSorter(
+      executedMigrationRepository,
+      migrationNameParser,
+    );
 
     this.registerService(MigrationsSorter, migrationsSorter);
 

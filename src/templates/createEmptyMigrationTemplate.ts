@@ -9,11 +9,7 @@ import { MigrationInterface } from 'elasticsearch-index-migrator';
 
 export class ${fileName}${createdAt.getTime()} implements MigrationInterface {
   getName(): string {
-    return '${fileName}-${createdAt.getTime()}';
-  }
-
-  getCreatedAt(): Date {
-    return new Date('${createdAt.toISOString()}');
+    return '${createdAt.getTime()}-${fileName}';
   }
 
   async up(client: Client): Promise<void> {
@@ -30,14 +26,7 @@ export class ${fileName}${createdAt.getTime()} {
    * @return {string}
    */
   getName() {
-    return '${fileName}-${createdAt.getTime()}';
-  }
-
-  /**
-   * @return {Date}
-   */
-  getCreatedAt() {
-    return new Date('${createdAt.toISOString()}');
+    return '${createdAt.getTime()}-${fileName}';
   }
 
   /**

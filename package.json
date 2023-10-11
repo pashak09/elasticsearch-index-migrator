@@ -1,6 +1,6 @@
 {
   "name": "elasticsearch-index-migrator",
-  "version": "0.0.6-alpha",
+  "version": "0.0.1",
   "main": "cli.js",
   "license": "MIT",
   "types": "index.d.ts",

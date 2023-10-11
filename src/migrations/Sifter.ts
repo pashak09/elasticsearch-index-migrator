@@ -4,8 +4,7 @@ export function isMigration(obj: unknown): obj is Migration {
   return (
     typeof obj === 'function' &&
     typeof obj.prototype?.getName === 'function' &&
-    typeof obj.prototype?.up === 'function' &&
-    typeof obj.prototype?.getCreatedAt === 'function'
+    typeof obj.prototype?.up === 'function'
   );
 }
 
