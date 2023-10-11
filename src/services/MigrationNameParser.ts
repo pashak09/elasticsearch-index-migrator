@@ -16,15 +16,19 @@ export class MigrationNameParser {
       );
     }
 
+    const time = parseInt(timestamp);
+    const createdAt = new Date(time);
+
     if (
-      Number.isNaN(parseInt(timestamp)) === true ||
-      Number.isNaN(Date.parse(timestamp)) === true
+      Number.isNaN(time) === true ||
+      Number.isNaN(createdAt.getTime()) === true ||
+      createdAt.getTime() <= 0
     ) {
       throw new Error(
         `The first part of the "${value}" value should be a valid timestamp"`,
       );
     }
 
-    return { createdAt: new Date(timestamp), name };
+    return { createdAt, name };
   }
 }
